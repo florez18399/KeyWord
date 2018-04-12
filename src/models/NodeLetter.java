@@ -1,11 +1,23 @@
 package models;
 
+import java.util.LinkedList;
+
 public class NodeLetter {
 	private char info;
 	private int mark;
+	private LinkedList<NodeLetter> children;
 
 	public NodeLetter(char info) {
 		this.info = info;
+		this.children = new LinkedList<NodeLetter>();
+	}
+
+	public LinkedList<NodeLetter> getChildren() {
+		return children;
+	}
+
+	public void setChildren(LinkedList<NodeLetter> children) {
+		this.children = children;
 	}
 
 	public char getInfo() {
