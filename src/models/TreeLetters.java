@@ -12,18 +12,19 @@ public class TreeLetters {
 	 */
 	public void addWord(String word) {
 		addWord(0, word, root);
+		System.out.println("Termino de agregar");
 	}
 
 	private void addWord(int i, String word, NodeLetter actualLetter) {
-		NodeLetter foundLetter = searchChildRoot(actualLetter, word.charAt(i));
-		if (foundLetter != null) {
-			addWord(i + 1, word, foundLetter);
-		} else {
-			NodeLetter nodeFather = actualLetter;
-			while (i < word.length()) {
-				nodeFather.getChildren().add(new NodeLetter(word.charAt(i)));
-				nodeFather = nodeFather.getChildren().getLast();
-				i++;
+		System.out.println(i);
+		if (i < word.length()) {
+			NodeLetter foundLetter = searchChildRoot(actualLetter, word.charAt(i));
+			if (foundLetter != null) {
+				foundLetter.setMark(foundLetter.getMark() + 1);
+				addWord(i + 1, word, foundLetter);
+			} else {
+				actualLetter.getChildren().add(new NodeLetter(word.charAt(i)));
+				addWord(i + 1, word, actualLetter.getChildren().getLast());
 			}
 		}
 	}
@@ -35,7 +36,7 @@ public class TreeLetters {
 		}
 		return null;
 	}
-	
+
 	public void showTreeInConsole(NodeLetter actual, String separator) {
 		System.out.println(separator + actual.getInfo());
 		for (NodeLetter actualLetter : actual.getChildren()) {

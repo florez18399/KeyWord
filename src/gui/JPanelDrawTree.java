@@ -6,20 +6,22 @@ import javax.swing.JPanel;
 
 import models.NodeLetter;
 
-public class JPanelDrawTree extends JPanel{
+public class JPanelDrawTree extends JPanel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private NodeLetter rootTree;
-	
+	private int y;
+
 	public JPanelDrawTree(NodeLetter rootTree) {
 		this.rootTree = rootTree;
 		init();
 	}
-	
+
 	private void init() {
+		y = 40;
 		repaint();
 	}
 
@@ -30,14 +32,15 @@ public class JPanelDrawTree extends JPanel{
 	private void paintTree(NodeLetter actualNode, int x, int y, Graphics graphics) {
 		graphics.drawString(String.valueOf(actualNode.getInfo()), x, y);
 		for (NodeLetter sonNode : actualNode.getChildren()) {
-			paintTree(sonNode, x + 20, y + 20, graphics);
+			y += y/(actualNode.getChildren().indexOf(sonNode) + 1);
+			paintTree(sonNode, x + 40, y, graphics);
 		}
 	}
 
 	@Override
 	public void paint(Graphics g) {
-		paintTree(g);
 		super.paint(g);
+		paintTree(g);
 	}
-	
-}	
+
+}
