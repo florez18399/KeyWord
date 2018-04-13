@@ -22,7 +22,7 @@ public class TreeLetters {
 			NodeLetter nodeFather = actualLetter;
 			while (i < word.length()) {
 				nodeFather.getChildren().add(new NodeLetter(word.charAt(i)));
-				nodeFather = nodeFather.getChildren().get(0);
+				nodeFather = nodeFather.getChildren().getLast();
 				i++;
 			}
 		}
