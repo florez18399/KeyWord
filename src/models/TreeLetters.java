@@ -35,6 +35,13 @@ public class TreeLetters {
 		}
 		return null;
 	}
+	
+	public void showTreeInConsole(NodeLetter actual, String separator) {
+		System.out.println(separator + actual.getInfo());
+		for (NodeLetter actualLetter : actual.getChildren()) {
+			showTreeInConsole(actualLetter, separator + "                    |");
+		}
+	}
 
 	public NodeLetter getRoot() {
 		return root;
