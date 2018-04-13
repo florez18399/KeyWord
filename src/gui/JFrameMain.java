@@ -29,5 +29,13 @@ public class JFrameMain extends JFrame {
 	public void repaintTree(NodeLetter rootTree) {
 		panelMain.setRootTree(rootTree);
 	}
+	
+	public String getWord() {
+		return panelMain.getWord();
+	}
+	
+	public void cleanField() {
+		panelMain.cleanField();
+	}
 
 }

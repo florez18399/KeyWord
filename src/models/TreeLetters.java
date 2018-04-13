@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+
 public class TreeLetters {
 	private NodeLetter root;
 
@@ -27,6 +29,56 @@ public class TreeLetters {
 				addWord(i + 1, word, actualLetter.getChildren().getLast());
 			}
 		}
+	}
+
+	public NodeLetter searchNode(NodeLetter actual, char letter) {
+		if (actual.getInfo() == letter) {
+			return actual;
+		} else {
+			for (NodeLetter actualLetter : actual.getChildren()) {
+				return searchNode(actualLetter, letter);
+			}
+		}
+		return null;
+	}
+
+	public NodeLetter searchLetters(String word) {
+		System.out.println(word);
+		int i = 0;
+		NodeLetter letterSearch = searchChildRoot(root, word.charAt(i));
+		while (i < word.length()) {
+			i++;
+			letterSearch = searchChildRoot(letterSearch, word.charAt(i));
+		}
+		return letterSearch;
+	}
+
+	public ArrayList<String> getRecommendations(NodeLetter father, String word) {
+		ArrayList<String> arrayList = new ArrayList<>();
+		getRecommendations(arrayList, father, "");
+		return arrayList;
+	}
+	
+	public void showArray(String word) {
+		ArrayList<String> array = getRecommendations(searchLetters(word), word);
+		for (String string : array) {
+			System.out.println(string);
+		}
+	}
+
+	private void getRecommendations(ArrayList<String> list, NodeLetter actual, String word) {
+		if (actual.getChildren().isEmpty()) {
+			list.add(word);
+		} else {
+			word += actual.getInfo();
+		}
+		for (NodeLetter letterActual : actual.getChildren()) {
+			getRecommendations(list, letterActual, word);
+		}
+	}
+
+	public String getWord(NodeLetter father) {
+		return null;
 	}
 
 	private NodeLetter searchChildRoot(NodeLetter father, char letter) {
