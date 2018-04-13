@@ -1,20 +1,32 @@
 package gui;
 
+import java.awt.BorderLayout;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-public class JFrameMain extends JFrame{
+import models.NodeLetter;
+
+public class JFrameMain extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanelMain panelMain;
 	
-	public JFrameMain() {
-		init();
+	public JFrameMain(NodeLetter rootTree) {
+		init(rootTree);
 	}
 
-	private void init() {
+	private void init(NodeLetter rootTree) {
 		setTitle(ConstantsGUI.TITLE_APP);
 		setIconImage(new ImageIcon(getClass().getResource(ConstantsGUI.ICON_APP_PATH)).getImage());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setExtendedState(MAXIMIZED_BOTH);
+		panelMain = new JPanelMain(rootTree);
+		add(panelMain);
 		setVisible(true);
 	}
-	
+
 }
